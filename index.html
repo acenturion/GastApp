@@ -11,10 +11,10 @@
 		<input type="date" name="fecha" id="calendario" class="inputs">
 		<hr/>
 		<h2>Motivo</h2>
-		<input type="text" name="motivo" id="motivo" class="inputs">
+		<input type="text" name="motivo" id="motivo" class="inputs" required>
 		<hr/>
 		<h2>Monto</h2>
-		<input type="number" name="monto" id="monto" class="inputs">
+		<input type="number" name="monto" id="monto" class="inputs" required>
 		<hr/>
 		<h2>Usuario</h2>
 		<select name="usuario" class="inputs">
@@ -22,6 +22,7 @@
 		  <option value="Charo">Charo</option>
 		</select>
 		<hr/>
+		<div id="resultado"></div>
 		<div class="botones">
 			<button type="submit">Enviar</button>
 		</div>

@@ -5,11 +5,32 @@ function todayDate(){
 	return new Date().toJSON().slice(0,10);
 };
 
+function succesMessage(type,msj){
+	var mensaje = document.querySelector("#resultado");
+
+	if(type){
+		mensaje.className = "exito";
+		mensaje.innerHTML = "<p>Se agrego un nuevo gasto</p>";
+		clean();
+	}else{
+		mensaje.className = "error";
+		mensaje.innerHTML = "<p>Error, ver en consola</p>";
+		console.log(msj);
+	}
+}
+
+function clean(){
+	document.querySelector("#motivo").value = "";
+	document.querySelector("#monto").value = "";
+	var mensaje = document.querySelector("#resultado");
+	setTimeout(function(){ mensaje.innerHTML = "<p></p>" }, 3000);
+}
+
 document.querySelector("#calendario").value = todayDate();
 
 form.addEventListener('submit', e => {
     e.preventDefault()
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => console.log('Success!', response))
-      .catch(error => console.error('Error!', error.message))
+      .then(response => succesMessage(true,"exito"))
+      .catch(error => succesMessage(false, error.message))
 });

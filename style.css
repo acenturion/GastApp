@@ -31,3 +31,36 @@ button{
 	margin-top: 2.5%;
 	font-size: 2em;
 }
+
+.exito{
+	font-size: 1.5em;
+    background-color: #77ffa9;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 2.5%;
+}
+
+.error{
+	
+	font-size: 1.5em;
+    background-color: #ffc4bc;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 2.5%;
+}
+
+@media only screen and (max-device-width: 480px){
+
+  	input, select{
+		font-size: 2em;
+		height: 50px;
+	}
+	
+	#formulario{
+		font-size: 2em;
+    	max-width: 90%;
+	}
+	button{
+		padding: 1%;
+	}
+}
