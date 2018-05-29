@@ -21,6 +21,8 @@ body{
 
 h2{
 	font-size: 2em;
+	display: inline-block;
+	margin-right: 2.5%;
 }
 .inputs{
 	width: 100%;
@@ -47,6 +49,12 @@ button{
     text-align: center;
     font-weight: bold;
     margin-top: 2.5%;
+}
+span{
+	font-size: 2em;
+}
+input[type="checkbox" i]{
+	width: 10%;
 }
 
 @media only screen and (max-device-width: 480px){

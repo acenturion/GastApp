@@ -34,3 +34,12 @@ form.addEventListener('submit', e => {
       .then(response => succesMessage(true,"exito"))
       .catch(error => succesMessage(false, error.message))
 });
+
+
+var botonGasto = document.querySelector("#gasto");
+var monto = document.querySelector("#monto");
+
+botonGasto.addEventListener("click", function(e){
+		e.preventDefault();
+		monto.value = monto.value * -1;
+});
