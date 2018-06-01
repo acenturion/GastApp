@@ -43,3 +43,16 @@ botonGasto.addEventListener("click", function(e){
 		e.preventDefault();
 		monto.value = monto.value * -1;
 });
+
+//Jugar ccon el get de google 
+
+  $.ajax({
+  	crossDomain: true,
+    url: scriptURL,
+    method: "GET",
+    dataType: "jsonp",
+    success: function(res){
+
+    	$("body").prepend(`<div class="respuesta">${res["nombre"]} <br> monto deudor: ${res["monto"]}</div>`);
+    }
+  });
