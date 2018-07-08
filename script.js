@@ -28,16 +28,21 @@ function clean(){
 
 document.querySelector("#calendario").value = todayDate();
 
-form.addEventListener('submit', e => {
-    e.preventDefault()
+function sendForm(){
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
       .then(response => succesMessage(true,"exito"))
-      .catch(error => succesMessage(false, error.message))
+      .catch(error => succesMessage(false, error.message));
+}
+
+form.addEventListener('submit', e => {
+	e.preventDefault()
+	sendForm();
 });
 
 
 var botonGasto = document.querySelector("#gasto");
 var monto = document.querySelector("#monto");
+
 
 botonGasto.addEventListener("click", function(e){
 		e.preventDefault();
