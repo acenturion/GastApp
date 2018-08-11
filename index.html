@@ -58,7 +58,7 @@
                             </v-menu>
                         </div>
                         <div>
-                            <v-text-field label="Motivo" name="motivo"></v-text-field>
+                            <v-text-field label="Motivo" v-model="motivo" name="motivo"></v-text-field>
                         </div>
                         <div>
                             <v-text-field type="number" v-model="monto" label="Monto" name="monto"></v-text-field>
@@ -124,9 +124,9 @@
                 },
                 success() {
                     this.motivo = '',
-                        this.monto = '0',
-                        this.usuario = 'Alejandro',
-                        this.fecha = new Date().toJSON().slice(0, 10)
+                    this.monto = '',
+                    this.usuario = '',
+                    this.fecha = new Date().toJSON().slice(0, 10)
                 }
             }
         })
