@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<title>Test app</title>
+</head>
+<body>
+	<form id="formulario">
+		<h2>Fecha</h2>
+		<input type="date" name="fecha" id="calendario" class="inputs">
+		<hr/>
+		<h2>Motivo</h2>
+		<input type="text" name="motivo" id="motivo" class="inputs" required>
+		<hr/>
+		<h2>Monto</h2>
+		<button id="gasto">Gasto?</button>
+		<input type="number" name="monto" id="monto" class="inputs" required>
+		<hr/>
+		<h2>Usuario</h2>
+		<select name="usuario" class="inputs">
+		  <option value="Fondo">Fondo</option>
+		  <option value="Alejandro">Alejandro</option>
+		  <option value="Charo">Charo</option>
+		  <option value="A y C">A y C</option>
+		</select>
+		<hr/>
+		<div id="resultado"></div>
+		<div class="botones">
+			<button type="submit">Enviar</button>
+		</div>
+	</form>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

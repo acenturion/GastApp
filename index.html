@@ -1,36 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-	<title>Test app</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <title>Document</title>
+    <style>
+        
+        #container {
+            width: 40%;
+            margin: 0 auto;
+            padding: 3% 0 0 0;
+            font-size: 2em;
+        }
+
+        .botones {
+            margin-top: 2.5%;
+            text-align: center;
+
+        }
+
+        button {
+            width: 35%;
+        }
+
+        .application--wrap{
+            min-height: 0;
+        }
+        
+        @media only screen and (max-device-width: 480px) {
+            #container {
+                font-size: 2em;
+                width: 95%;
+            }
+        }
+    </style>
 </head>
+
 <body>
-	<form id="formulario">
-		<h2>Fecha</h2>
-		<input type="date" name="fecha" id="calendario" class="inputs">
-		<hr/>
-		<h2>Motivo</h2>
-		<input type="text" name="motivo" id="motivo" class="inputs" required>
-		<hr/>
-		<h2>Monto</h2>
-		<button id="gasto">Gasto?</button>
-		<input type="number" name="monto" id="monto" class="inputs" required>
-		<hr/>
-		<h2>Usuario</h2>
-		<select name="usuario" class="inputs">
-		  <option value="Fondo">Fondo</option>
-		  <option value="Alejandro">Alejandro</option>
-		  <option value="Charo">Charo</option>
-		  <option value="A y C">A y C</option>
-		</select>
-		<hr/>
-		<div id="resultado"></div>
-		<div class="botones">
-			<button type="submit">Enviar</button>
-		</div>
-	</form>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="script.js"></script>
+    <div id="container">
+        <v-app>
+            <v-content>
+                <v-container>
+                    <v-form method="POST" @submit.prevent="sendForm" id="formulario">
+                        <div>
+                            <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40" :return-value.sync="fecha" lazy transition="scale-transition"
+                                offset-y full-width min-width="290px">
+                                <v-text-field slot="activator" v-model="fecha" label="Fecha" prepend-icon="event" readonly name="fecha"></v-text-field>
+                                <v-date-picker v-model="fecha" no-title scrollable>
+                                    <v-spacer></v-spacer>
+                                    <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
+                                    <v-btn flat color="primary" @click="$refs.menu.save(fecha)">OK</v-btn>
+                                </v-date-picker>
+                            </v-menu>
+                        </div>
+                        <div>
+                            <v-text-field label="Motivo" name="motivo"></v-text-field>
+                        </div>
+                        <div>
+                            <v-text-field type="number" v-model="monto" label="Monto" name="monto"></v-text-field>
+                        </div>
+                        <div>
+                            <v-select :items="options" v-model="usuario" label="Usuario"></v-select>
+                            <input type="hidden" v-model="usuario" name="usuario" />
+                        </div>
+                        <div class="botones">
+                            <v-btn color="primary" @click="sendForm">Enviar</v-btn>
+                        </div>
+                    </v-form>
+
+                    <v-alert v-model="alert.estado" v-if dismissible type="info">
+                        {{alert.mensaje}}
+                    </v-alert>
+
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <script>
+        const url = 'https://script.google.com/macros/s/AKfycbx4Z4TRWnH_S1lK9eBRcsf0wD9TWnRqvQmFfJXln9hawxs1d7uX/exec';
+        var app = new Vue({
+            el: '#container',
+            data: {
+                fecha: new Date().toJSON().slice(0, 10),
+                motivo: '',
+                monto: '',
+                usuario: '',
+                menu: false,
+                alert: { estado: '', mensaje: '' },
+                options: [
+                    'Alejandro',
+                    'Charo',
+                    'Fondo',
+                    'A y C'
+                ]
+            },
+            methods: {
+                sendForm() {
+                    axios.post(url,
+                        new FormData(document.forms["formulario"]),
+                        {
+                            headers: {
+                                'Content-type': 'application/x-www-form-urlencoded',
+                            }
+                        }).then(response => {
+                            this.success();
+                            this.alert.estado = true;
+                            this.alert.mensaje = 'Se agrego un nuevo gasto!'
+                        })
+                        .catch(error => {
+                            console.log(error.messagge);
+                            this.alert.estado = true;
+                            this.alert.mensaje = 'Ocurrio un error ver log :)'
+
+                        });
+                },
+                success() {
+                    this.motivo = '',
+                        this.monto = '0',
+                        this.usuario = 'Alejandro',
+                        this.fecha = new Date().toJSON().slice(0, 10)
+                }
+            }
+        })
+
+    </script>
 </body>
+
 </html>
