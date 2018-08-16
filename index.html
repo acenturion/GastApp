@@ -11,7 +11,7 @@
     <style>
         
         #container {
-            width: 40%;
+            width: 500px;
             margin: 0 auto;
             padding: 3% 0 0 0;
             font-size: 2em;
@@ -72,7 +72,10 @@
                         </div>
                     </v-form>
 
-                    <v-alert v-model="alert.estado" v-if dismissible type="info">
+                    <v-alert v-model="alert.estado" v-if="alert.estado === 'exito'" dismissible type="success">
+                        {{alert.mensaje}}
+                    </v-alert>
+                    <v-alert v-model="alert.estado"  v-if="alert.estado === 'error'" dismissible type="error">
                         {{alert.mensaje}}
                     </v-alert>
 
@@ -112,13 +115,13 @@
                             }
                         }).then(response => {
                             this.success();
-                            this.alert.estado = true;
+                            this.alert.estado = "exito";
                             this.alert.mensaje = 'Se agrego un nuevo gasto!'
                         })
                         .catch(error => {
-                            console.log(error.messagge);
-                            this.alert.estado = true;
-                            this.alert.mensaje = 'Ocurrio un error ver log :)'
+                            console.log(error);
+                            this.alert.estado = 'error';
+                            this.alert.mensaje = 'Ocurrio un error ver log :('
 
                         });
                 },
