@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <title>Document</title>
-    <script src="//script.sheetsu.com/"></script>
     <style>
 
         #container {
@@ -71,17 +70,11 @@
                         </div>
 
                         <div class="list" v-for="usr in usuarios">
-                            <v-chip v-bind:for="usr.Usuario">
-                                <input type="radio" v-bind:id="usr.Usuario" v-bind:value="usr.Usuario" name="usuario" />
-                                <label v-bind:for="usr.Usuario">{{usr.Usuario}}</label>
+                            <v-chip v-bind:for="usr">
+                                <input type="radio" v-bind:id="usr" v-bind:value="usr" name="usuario" />
+                                <label v-bind:for="usr">{{usr}}</label>
                             </v-chip>
                         </div>
-                        <!--<div>
-                            <v-subheader>Categorias (Opcional)</v-subheader>
-                            <li v-for="cat in categorias">
-                                <v-chip close>{{cat.Categorias}}</v-chip>
-                            </li>
-                        </div>-->
                         <div class="botones">
                             <v-btn color="primary" @click="sendForm">Enviar</v-btn>
                         </div>
@@ -110,14 +103,10 @@
                 fecha: new Date().toJSON().slice(0, 10),
                 motivo: '',
                 monto: '',
-                usuarios: [],
+                usuarios: ["Ale", "Charo", "Fondo", "A y C"],
                 categorias: [],
                 menu: false,
                 alert: { estado: '', mensaje: '' },
-                value: ["a", "b", "c"]
-            },
-            created() {
-                this.fetchData()
             },
             methods: {
                 sendForm() {
@@ -144,20 +133,6 @@
                         this.monto = '',
                         this.usuario = '',
                         this.fecha = new Date().toJSON().slice(0, 10)
-                },
-                fetchData() {
-                    var config = localStorage.getItem('config');
-                    console.log(config)
-                    if ( config != null) {
-                        this.categorias = JSON.parse(config)
-                        this.usuarios = JSON.parse(config)
-                    } else {
-                        Sheetsu.read("https://sheetsu.com/apis/v1.0su/4449fd87dc78", {}).then((data, err) => {
-                            localStorage.setItem('config', JSON.stringify(data));
-                            this.categorias = data
-                            this.usuarios = data
-                        });
-                    }
                 }
             }
 
