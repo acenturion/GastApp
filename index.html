@@ -40,6 +40,16 @@
         .list{
             display: inline;
         }
+        .title{
+            color:rgba(0,0,0,.54);
+            padding: 8px 0;
+        }
+
+        .button-sheet{
+            margin-right: 5%;
+            margin-bottom: 5%;
+            float: right;
+        }
     </style>
 </head>
 
@@ -69,8 +79,9 @@
                             <v-text-field type="number" v-model="monto" label="Monto" name="monto"></v-text-field>
                         </div>
 
+                        <!--<h4 class="title">Usuario</h4>-->
                         <div class="list" v-for="usr in usuarios">
-                            <v-chip v-bind:for="usr">
+                            <v-chip>
                                 <input type="radio" v-bind:id="usr" v-bind:value="usr" name="usuario" />
                                 <label v-bind:for="usr">{{usr}}</label>
                             </v-chip>
@@ -79,6 +90,11 @@
                             <v-btn color="primary" @click="sendForm">Enviar</v-btn>
                         </div>
                     </v-form>
+                    <div class="button-sheet">
+                        <v-btn fab dark color="teal" @click="openSheet">
+                            <v-icon dark>list</v-icon>
+                        </v-btn>
+                    </div>
 
                     <v-alert v-model="alert.estado" v-if="alert.estado === 'exito'" dismissible type="success">
                         {{alert.mensaje}}
@@ -133,6 +149,9 @@
                         this.monto = '',
                         this.usuario = '',
                         this.fecha = new Date().toJSON().slice(0, 10)
+                },
+                openSheet() {
+                    window.open("https://docs.google.com/spreadsheets/d/1IZpSNp7pcTob7_NG4iTY8olDl_DJpIUTkYrxfH19ja0/edit?usp=sharing");
                 }
             }
 
