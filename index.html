@@ -14,7 +14,7 @@
             width: 500px;
             margin: 0 auto;
             padding: 3% 0 0 0;
-            font-size: 2em;
+            
         }
 
         .botones {
@@ -46,7 +46,6 @@
         }
 
         .button-sheet{
-            margin-right: 5%;
             margin-bottom: 5%;
             float: right;
         }
@@ -90,11 +89,6 @@
                             <v-btn color="primary" @click="sendForm">Enviar</v-btn>
                         </div>
                     </v-form>
-                    <div class="button-sheet">
-                        <v-btn fab dark color="teal" @click="openSheet">
-                            <v-icon dark>list</v-icon>
-                        </v-btn>
-                    </div>
 
                     <v-alert v-model="alert.estado" v-if="alert.estado === 'exito'" dismissible type="success">
                         {{alert.mensaje}}
@@ -102,6 +96,11 @@
                     <v-alert v-model="alert.estado" v-if="alert.estado === 'error'" dismissible type="error">
                         {{alert.mensaje}}
                     </v-alert>
+                    <div class="button-sheet">
+                        <v-btn fab dark color="teal" @click="openSheet">
+                            <v-icon dark>list</v-icon>
+                        </v-btn>
+                    </div>
 
                 </v-container>
             </v-content>
