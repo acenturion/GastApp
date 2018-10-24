@@ -35,6 +35,8 @@
             #container {
                 font-size: 2em;
                 width: 95%;
+                height: 100vh;
+                max-width: 500px;
             }
         }
         .list{
@@ -121,17 +123,19 @@
                 usuarios: ["Ale", "Charo", "Fondo", "A y C"],
                 categorias: [],
                 menu: false,
-                alert: { estado: '', mensaje: '' },
+                alert: {
+                    estado: '',
+                    mensaje: ''
+                },
             },
             methods: {
                 sendForm() {
                     axios.post(url,
-                        new FormData(document.forms["formulario"]),
-                        {
-                            headers: {
-                                'Content-type': 'application/x-www-form-urlencoded',
-                            }
-                        }).then(response => {
+                            new FormData(document.forms["formulario"]), {
+                                headers: {
+                                    'Content-type': 'application/x-www-form-urlencoded',
+                                }
+                            }).then(response => {
                             this.success();
                             this.alert.estado = "exito";
                             this.alert.mensaje = 'Se agrego un nuevo gasto!'
@@ -150,12 +154,13 @@
                         this.fecha = new Date().toJSON().slice(0, 10)
                 },
                 openSheet() {
-                    window.open("https://docs.google.com/spreadsheets/d/1IZpSNp7pcTob7_NG4iTY8olDl_DJpIUTkYrxfH19ja0/edit?usp=sharing");
+                    window.open(
+                        "https://docs.google.com/spreadsheets/d/1IZpSNp7pcTob7_NG4iTY8olDl_DJpIUTkYrxfH19ja0/edit?usp=sharing"
+                    );
                 }
             }
 
         })
-
     </script>
 </body>
 
