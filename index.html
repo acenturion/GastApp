@@ -17,16 +17,6 @@
             
         }
 
-        .botones {
-            margin-top: 2.5%;
-            text-align: center;
-
-        }
-
-        button {
-            width: 35%;
-        }
-
         .application--wrap{
             min-height: 0;
         }
@@ -46,11 +36,12 @@
             color:rgba(0,0,0,.54);
             padding: 8px 0;
         }
-
-        .button-sheet{
+        
+        .v-btn{
+            margin-top: 5%;
             margin-bottom: 5%;
-            float: right;
         }
+    
     </style>
 </head>
 
@@ -87,8 +78,9 @@
                                 <label v-bind:for="usr">{{usr}}</label>
                             </v-chip>
                         </div>
-                        <div class="botones">
+                        <div class="text-xs-center">
                             <v-btn color="primary" @click="sendForm">Enviar</v-btn>
+                            <v-icon right dark>cloud_upload</v-icon>
                         </div>
                     </v-form>
 
@@ -98,9 +90,9 @@
                     <v-alert v-model="alert.estado" v-if="alert.estado === 'error'" dismissible type="error">
                         {{alert.mensaje}}
                     </v-alert>
-                    <div class="button-sheet">
-                        <v-btn fab dark color="teal" @click="openSheet">
-                            <v-icon dark>list</v-icon>
+                    <div class="text-xs-right">
+                        <v-btn  round @click="openSheet" value="ver" color="teal">Ver excel
+                            <v-icon right>list</v-icon>
                         </v-btn>
                     </div>
 
