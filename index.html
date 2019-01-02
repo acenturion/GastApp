@@ -23,21 +23,21 @@
         
         @media only screen and (max-device-width: 480px) {
             #container {
-                font-size: 2em;
                 width: 95%;
                 height: 100vh;
                 max-width: 500px;
             }
+            #formulario{
+                font-size: 2em;
+            }
         }
+        
         .list{
             display: inline;
         }
-        .title{
-            color:rgba(0,0,0,.54);
-            padding: 8px 0;
-        }
-        
-        .v-btn{
+       
+
+        #btn-enviar, #btn-enviar-excel {
             margin-top: 5%;
             margin-bottom: 5%;
             min-width: 48px;
@@ -80,7 +80,7 @@
                                 <label v-bind:for="usr">{{usr}}</label>
                             </v-chip>
                         </div>
-                        <div class="text-xs-center">
+                        <div class="text-xs-center" id="btn-enviar">
                             <v-btn color="primary" @click="sendForm">Enviar
                                 <v-icon right dark>cloud_upload</v-icon>
                             </v-btn>
@@ -93,7 +93,7 @@
                     <v-alert v-model="alert.estado" v-if="alert.estado === 'error'" dismissible type="error">
                         {{alert.mensaje}}
                     </v-alert>
-                    <div class="text-xs-right">
+                    <div class="text-xs-right" id="btn-ver-excel">
                         <v-btn  round @click="openSheet" value="ver" color="teal">Ver excel
                             <v-icon right>list</v-icon>
                         </v-btn>
