@@ -54,15 +54,14 @@
                 <v-container>
                     <v-form method="POST" @submit.prevent="sendForm" id="formulario">
                         <div>
-                            <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40"
-                                :return-value.sync="fecha" lazy transition="scale-transition" offset-y full-width
-                                min-width="290px">
-                                <v-text-field slot="activator" v-model="fecha" label="Fecha" prepend-icon="event"
-                                    readonly name="fecha"></v-text-field>
+                            <v-menu ref="menu" :close-on-content-click="false" v-model="menu" :nudge-right="40" :return-value.sync="fecha" transition="scale-transition" offset-y full-width min-width="290px">
+                                <template v-slot:activator="{ on }">
+                                    <v-text-field v-model="fecha" label="Fecha" prepend-icon="event" readonly name="fecha" v-on="on"></v-text-field>
+                                </template>
                                 <v-date-picker v-model="fecha" no-title scrollable>
                                     <v-spacer></v-spacer>
-                                    <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-                                    <v-btn flat color="primary" @click="$refs.menu.save(fecha)">OK</v-btn>
+                                    <v-btn color="primary" @click="menu = false">Cancel</v-btn>
+                                    <v-btn color="primary" @click="$refs.menu.save(fecha)">OK</v-btn>
                                 </v-date-picker>
                             </v-menu>
                         </div>
@@ -94,7 +93,7 @@
                         {{alert.mensaje}}
                     </v-alert>
                     <div class="text-xs-right" id="btn-ver-excel">
-                        <v-btn  round @click="openSheet" value="ver" color="teal">Ver excel
+                        <v-btn  rounded @click="openSheet" value="ver" color="teal">Ver excel
                             <v-icon right>list</v-icon>
                         </v-btn>
                     </div>
@@ -106,11 +105,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.0/dist/vuetify.js"></script>
     <script>
         const url = 'https://script.google.com/macros/s/AKfycbx4Z4TRWnH_S1lK9eBRcsf0wD9TWnRqvQmFfJXln9hawxs1d7uX/exec';
         var app = new Vue({
             el: '#container',
+            vuetify: new Vuetify(),
             data: {
                 fecha: new Date().toJSON().slice(0, 10),
                 motivo: '',
